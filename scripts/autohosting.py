@@ -37,5 +37,6 @@ def print_users(users):
 
 
 users = get_users()
-print(users.__dict__)
+for user in users:
+    print(user.__dict__)
 print_users(users)
