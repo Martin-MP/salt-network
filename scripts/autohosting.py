@@ -8,7 +8,7 @@ class User:
         self.domains = domains
     
 
-def get_domains():
+def get_users():
     users = list()
     for name in os.listdir('/var/www'):
         domains = dict()
@@ -18,7 +18,7 @@ def get_domains():
     return users
 
 
-def print_domains(users):
+def print_users(users):
     for user in users:
         if user.name == user[0].name:
             if user.name == user[-1].name:
@@ -36,5 +36,6 @@ def print_domains(users):
                 print(f"        ┣━{domain}")
 
 
-users = get_domains()
-print_domains(users)
+users = get_users()
+print(users)
+print_users(users)
