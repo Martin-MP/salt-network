@@ -106,9 +106,15 @@ def create_user_directory(name):
     os.system(f"mkdir /var/www/{name} > /dev/null 2>&1")
     print(f"\nUser directory created in /var/www/{name}")
 
+
 def create_domain_directory(name, domain):
     os.system(f"mkdir /var/www/{name}/{domain} > /dev/null 2>&1")
     print(f"\nDomain directory created in /var/www/{name}/{domain}")
+
+
+def create_user(name, password):
+    os.system(f"useradd -m {name} > /dev/null 2>&1")
+    os.system(f"echo {name}:{password} | chpasswd > /dev/null 2>&1")
 
 
 root_check()
