@@ -20,8 +20,8 @@ def get_users():
 
 def print_users(users):
     for user in users:
-        if user.name == user[0].name:
-            if user.name == user[-1].name:
+        if user.name == users[0].name:
+            if user.name == users[-1].name:
                 print(f"    ━━{user.name}")
             else:
                 print(f"    ┏━{user.name}")
