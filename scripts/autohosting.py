@@ -30,7 +30,7 @@ def print_users(users):
         else:
             print(f"    ┣━{user.name}")
         for domain in user.domains:
-            if domain == user.domains[-1]:
+            if domain == list(user.domains)[-1]:
                 print(f"        ┗━{domain}")
             else:
                 print(f"        ┣━{domain}")
