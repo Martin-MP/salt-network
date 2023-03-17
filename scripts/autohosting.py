@@ -20,20 +20,12 @@ def get_users():
 
 def print_users(users):
     for user in users:
-        if user.name == users[0].name:
-            if user.name == users[-1].name:
-                print(f"    ━━{user.name}")
-            else:
-                print(f"    ┏━{user.name}")
-        elif user.name == user[-1].name:
-            print(f"    ┗━{user.name}")
-        else:
-            print(f"    ┣━{user.name}")
+        print(f"{user.name}")
         for domain in user.domains:
             if domain == list(user.domains)[-1]:
-                print(f"        ┗━{domain}")
+                print(f"    ┗━{domain}")
             else:
-                print(f"        ┣━{domain}")
+                print(f"    ┣━{domain}")
 
 
 users = get_users()
