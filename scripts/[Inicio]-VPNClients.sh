@@ -39,6 +39,6 @@ cp /usr/share/easy-rsa/pki/ca.crt /home/$certificado/$certificado
 cp /usr/share/easy-rsa/pki/issued/$certificado.crt /home/$certificado/$certificado
 cp /usr/share/easy-rsa/pki/private/$certificado.key /home/$certificado/$certificado
 echo -e "ficheros necesarios ubicados en /home/$certificado/$certificado"
-scp -q -r /home/$certificado/* $user@$destip:$rute
+scp -q /home/$certificado/* $user@$destip:$rute
 
 echo -e "Transmisión realizada a la ip $destip con $user en la siguiente ruta: $rute"
