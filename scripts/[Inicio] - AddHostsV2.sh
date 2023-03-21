@@ -33,6 +33,12 @@ if [ -z "$ip" ]; then
     read -p "Dirección IP DNS: " ip
 fi
 
+ping -c 1 $ip > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo "La IP $ip no es alcanzable/válida"
+    exit 1
+fi
+
 if [ -z "$dominio" ]; then
     read -p "Dominio a añadir: " dominio
 fi
