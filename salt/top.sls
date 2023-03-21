@@ -1,7 +1,7 @@
 base:
   '*':
-    - vim.init
+    - vim
   'dhcp-dns-minion':
-    - dhcp_dns.init
+    - dhcp_dns
   'webhost':
-    - webserver.init
+    - webserver
