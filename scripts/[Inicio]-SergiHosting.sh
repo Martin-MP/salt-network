@@ -8,8 +8,8 @@ ip=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}')
 domain=""
 ipdomain=""
 username=""
+password=""
 group=""
-homedir=""
 bash="/bin/bash"
 
 
@@ -28,6 +28,22 @@ while [ $# -gt 0 ]; do
         ipdomain="$2"
         echo "IP del domain a añadir: $ipdomain"
         shift; shift;;
+        -u)
+        username="$2"
+        echo "Usuario a crear: $username"
+        shift; shift;;
+        -p)
+        password="$2"
+        echo "Contraseña a crear: $password"
+        shift; shift;;
+        -g)
+        group="$2"
+        echo "Grupo a crear: $group"
+        shift; shift;;
+        -b)
+        bash="$2"
+        echo "Shell a usar: $bash"
+        shift; shift;;
         *)
         # print how to use the script
         echo "Opción desconocida: $key"
@@ -35,6 +51,32 @@ while [ $# -gt 0 ]; do
         exit 1;;
     esac
 done
+
+# asign to the variable 'unattented' the value True if all keys are present
+unattented=$( [ -n "$ip" ] && [ -n "$domain" ] && [ -n "$ipdomain" ] && [ -n "$username" ] && [ -n "$group" ] && [ -n "$homedir" ] && [ -n "$bash" ] && echo "True" || echo "False" )
+if [ -z "$ip" ]; then
+    read -p "Dirección IP DNS: " ip
+fi
+ping -c 1 $ip > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo "La IP $ip no es alcanzable/válida"
+    exit 1
+fi
+if [ -z "$domain" ]; then
+    read -p "domain a añadir: " domain
+fi
+if [ -z "$ipdomain" ]; then
+    read -p "IP del domain a añadir: " ipdomain
+fi
+if [ -z "$username" ]; then
+    read -p "Usuario a crear: " username
+fi
+if [ -z "$password" ]; then
+    read -p "Contraseña a crear: " password
+fi
+if [ -z "$group" ]; then
+    read -p "Grupo a crear: " group
+fi
 
 while [ x$username = "x" ]; do # PEDIR USUARIO
     read -p "Pon el nombre de usuario sin espacios : " username
@@ -65,8 +107,6 @@ read -p "Dime nombre de tu página: " domain # PEDIR DOMINIO
 while [ x$domain = "x" ]; do
     read -p "Dime nombre de tu página: " domain
 done
-
-
 printf "\n${BLUE}>> $group creado para [$username] ${NC}\n"
 printf "\n${BLUE}>> Usuario Creado [$username] ${NC}\n"
 printf "\n\t\t${BLUE}[CREANDO VIRTUAL HOST]${NC}\n\n"
@@ -118,60 +158,6 @@ systemctl reload apache2
 printf "\n${BLUE}>> Añadiendo sitio [$domain] a host[local]${NC}\n"
 printf "\n${BLUE}>> VIRTUALHOST PARA SITIO [http://$domain] HABILITADO${NC}\n"
 
-clear
-
-echo "Iniciando transmisión al servidor DNS"
-
-ip=""
-
-domain=""
-
-ipdomain=""
-
-while [ $# -gt 0 ]; do
-    key="$1"
-    case $key in
-        -ip)
-        ip="$2"
-        echo "Dirección IP DNS: $ip"
-        shift; shift;;
-        -d)
-        domain="$2"
-        echo "domain a añadir: $domain"
-        shift; shift;;
-        -id)
-        ipdomain="$2"
-        echo "IP del domain a añadir: $ipdomain"
-        shift; shift;;
-        *)
-        # print how to use the script
-        echo "Opción desconocida: $key"
-        echo "Uso: $0 [-ip <ip dns>] [-d <domain>] [-id <ip domain>]"
-        exit 1;;
-    esac
-done
-
-
-# asign to the variable 'unattented' the value True if all keys are present
-unattented=$(if [ -n "$ip" ] && [ -n "$domain" ] && [ -n "$ipdomain" ]; then echo "True"; fi)
-
-if [ -z "$ip" ]; then
-    read -p "Dirección IP DNS: " ip
-fi
-
-ping -c 1 $ip > /dev/null 2>&1
-if [ $? -ne 0 ]; then
-    echo "La IP $ip no es alcanzable/válida"
-    exit 1
-fi
-
-if [ -z "$domain" ]; then
-    read -p "domain a añadir: " domain
-fi
-
-if [ -z "$ipdomain" ]; then
-    read -p "IP del domain a añadir: " ipdomain
-fi
 
 # Definir ancho máximo de cada columna
 max_ipdns=15
@@ -180,12 +166,12 @@ max_ipdomain=15
 
 # Función para truncar los datos que exceden el ancho máximo
 function truncar {
-  local max_length=$1
-  local string="$2"
-  if [[ ${#string} -gt $max_length ]]; then
+    local max_length=$1
+    local string="$2"
+    if [[ ${#string} -gt $max_length ]]; then
     string="${string:0:$max_length-3}..."
-  fi
-  printf "%-${max_length}s" "$string"
+    fi
+    printf "%-${max_length}s" "$string"
 }
 
 # Mostrar los datos en un cuadro con los anchos máximos y truncando los datos si es necesario
