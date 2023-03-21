@@ -26,6 +26,9 @@ while [ $# -gt 0 ]; do
     esac
 done
 
+# asign to the variable 'unattented' the value True if all keys are present
+unattented=$(if [ -n "$ip" ] && [ -n "$dominio" ] && [ -n "$ipdominio" ]; then echo "True"; fi)
+
 if [ -z "$ip" ]; then
     read -p "Dirección IP DNS: " ip
 fi
@@ -61,12 +64,13 @@ echo "│ $(truncar $max_ipdns "$ip") │ $(truncar $max_dominio "$dominio") │
 echo "└─────────────────┴──────────────────────────────┴─────────────────┘"
 
 #echo -e "La información es la siguiente: \n IP DNS= $ip \n Dominio= $dominio \n IP Dominio= $ipdominio \n"
-read -rp $'¿Desea proceder? (y/n):' confirm
-if [ "$confirm" != "y" ]; then
-	echo "Operación cancelada."
-	exit 0
+if [ -z "$unattented" ]; then
+    read -rp $'¿Desea proceder? (y/n):' confirm
+    if [ "$confirm" != "y" ]; then
+        echo "Operación cancelada."
+        exit 0
+    fi
 fi
-
 ssh root@$ip echo "$ipdominio $dominio" >> /etc/hosts
 
 if [ $? -eq 0 ]; then
