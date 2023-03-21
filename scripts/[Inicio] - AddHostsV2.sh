@@ -21,10 +21,13 @@ while [ $# -gt 0 ]; do
         echo "IP del dominio a añadir: $ipdominio"
         shift; shift;;
         *)
+        # print how to use the script
         echo "Opción desconocida: $key"
+        echo "Uso: $0 [-ip <ip dns>] [-d <dominio>] [-id <ip dominio>]"
         exit 1;;
     esac
 done
+
 
 # asign to the variable 'unattented' the value True if all keys are present
 unattented=$(if [ -n "$ip" ] && [ -n "$dominio" ] && [ -n "$ipdominio" ]; then echo "True"; fi)
