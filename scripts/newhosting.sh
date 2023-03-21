@@ -91,7 +91,6 @@ else
     echo "Grupo no existente, se creará"
     groupadd $group
 fi
-homedir="/home/$username"
 if [ "$unattented" = "True" ]; then
     confirm="y"
 else
@@ -100,9 +99,8 @@ fi
 if [ "$confirm" != "y" ]; then
     exit 1
 fi
-useradd -g $group -s $bash -d $homedir -m $username # CREAR USUARIO
+useradd -g $group -s $bash -m $username # CREAR USUARIO
 echo -e "$password\n$password" | passwd $username > /dev/null 2>&1 # CREAR CONTRASEÑA
-chown $username:$group $homedir
 while [ x$domain = "x" ]; do
     read -p "Dime nombre de tu página: " domain
 done
@@ -114,7 +112,6 @@ printf "\n${BLUE}>> Estableciendo permisos para usuario [$username] en sitio [$d
 chmod 755 /var/www/$domain/
 chmod 755 /var/www/$domain/public_html/
 chown root:root /var/www/$domain
-chown $username:$group /var/www/$domain/public_html/
 touch /var/www/$domain/public_html/index.html
 chown $username:$group /var/www/$domain/public_html/index.html
 chmod 755 /var/www/$domain/public_html/index.html
@@ -155,6 +152,7 @@ printf "\n${BLUE}>> Reiniciando apache2 ${NC}\n"
 systemctl reload apache2
 printf "\n${BLUE}>> Añadiendo sitio [$domain] a host[local]${NC}\n"
 printf "\n${BLUE}>> VIRTUALHOST PARA SITIO [http://$domain] HABILITADO${NC}\n\n"
+usermod $username -d /$domain
 
 
 # Definir ancho máximo de cada columna
