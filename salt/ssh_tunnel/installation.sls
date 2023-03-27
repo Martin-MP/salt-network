@@ -1,2 +1,2 @@
-dnsmasq:
+ssh:
   pkg.installed
