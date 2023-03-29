@@ -10,7 +10,7 @@ username=""
 password=""
 group=""
 bash="/bin/bash"
-
+hostapache="10.2.0.5"
 
 while [ $# -gt 0 ]; do
     key="$1"
@@ -89,7 +89,7 @@ if getent group $group >/dev/null 2>&1; then
     echo "Grupo existente, si quieres usar uno existente cambialo manualmente más tarde"
 else
     echo "Grupo no existente, se creará"
-    groupadd $group
+    ssh root@$hostapache groupadd $group
 fi
 if [ "$unattented" = "True" ]; then
     confirm="y"
@@ -99,6 +99,8 @@ fi
 if [ "$confirm" != "y" ]; then
     exit 1
 fi
+```
+ssh root@$hostapache << sshcomands
 useradd -g $group -s $bash -m $username # CREAR USUARIO
 echo -e "$password\n$password" | passwd $username > /dev/null 2>&1 # CREAR CONTRASEÑA
 while [ x$domain = "x" ]; do
@@ -153,7 +155,8 @@ systemctl reload apache2
 printf "\n${BLUE}>> Añadiendo sitio [$domain] a host[local]${NC}\n"
 printf "\n${BLUE}>> VIRTUALHOST PARA SITIO [http://$domain] HABILITADO${NC}\n\n"
 usermod $username -d /$domain
-
+sshcomands
+```
 
 # Definir ancho máximo de cada columna
 max_ipdns=15
@@ -185,7 +188,7 @@ if [ -z "$unattented" ]; then
         exit 0
     fi
 fi
-ssh root@$ip echo "$ipdomain $domain" >> /etc/hosts
+ssh root@$ip 'echo '$ipdomain $domain' >> /etc/hosts && systemctl restart dnsmasq'
 
 if [ $? -eq 0 ]; then
     printf "\n${BLUE}>> La línea se ha añadido correctamente al archivo /etc/hosts.${NC}\n"
