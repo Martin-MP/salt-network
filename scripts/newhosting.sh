@@ -99,7 +99,7 @@ fi
 if [ "$confirm" != "y" ]; then
     exit 1
 fi
-```
+
 ssh root@$hostapache << sshcomands
 useradd -g $group -s $bash -m $username # CREAR USUARIO
 echo -e "$password\n$password" | passwd $username > /dev/null 2>&1 # CREAR CONTRASEÑA
@@ -156,7 +156,7 @@ printf "\n${BLUE}>> Añadiendo sitio [$domain] a host[local]${NC}\n"
 printf "\n${BLUE}>> VIRTUALHOST PARA SITIO [http://$domain] HABILITADO${NC}\n\n"
 usermod $username -d /$domain
 sshcomands
-```
+
 
 # Definir ancho máximo de cada columna
 max_ipdns=15
