@@ -8,7 +8,7 @@ domain=""
 ipdomain=""
 username=""
 password=""
-group=""
+group="clientes"
 bash="/bin/bash"
 hostapache="10.2.0.5"
 
