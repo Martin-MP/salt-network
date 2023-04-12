@@ -131,8 +131,8 @@ DocumentRoot /var/www/$domain/public_html
 ErrorLog ${APACHE_LOG_DIR}/error.log
 CustomLog ${APACHE_LOG_DIR}/access.log combined
 SSLEngine on
-SSLCertificateFile /etc/apache2/certificate/apache-certificate.crt
-SSLCertificateKeyFile /etc/apache2/certificate/apache.key
+SSLCertificateFile /etc/apache2/certificate/apache2.cert
+SSLCertificateKeyFile /etc/apache2/certificate/apache2.key
 </VirtualHost>" > /etc/apache2/sites-available/$domain.conf
 echo "Match Group $group
 ChrootDirectory /var/www/$domain/
