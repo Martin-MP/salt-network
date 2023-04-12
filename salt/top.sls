@@ -5,3 +5,5 @@ base:
     - dhcp_dns
   'webhost':
     - webserver
+  'vpnserver':
+    - ssh_tunnel
