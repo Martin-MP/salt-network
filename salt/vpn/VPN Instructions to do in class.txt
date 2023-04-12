@@ -1,0 +1,7 @@
+/etc/openvpn/server.conf: Copiará el archivo server.conf de tu directorio de archivo de estados openvpn a la ruta /etc/openvpn/server.conf en el servidor.
+
+/etc/openvpn/easy-rsa/vars: Copiará el archivo vars de tu directorio de archivo de estados openvpn/easy-rsa a la ruta /etc/openvpn/easy-rsa/vars en el servidor.
+
+/etc/openvpn/easy-rsa/pki: Creará un directorio en la ruta /etc/openvpn/easy-rsa/pki en el servidor.
+
+/etc/openvpn/easy-rsa/Makefile: Copiará el archivo Makefile de tu directorio de archivo de estados openvpn/easy-rsa a la ruta /etc/openvpn/easy-rsa/Makefile en el servidor.
