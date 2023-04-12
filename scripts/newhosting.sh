@@ -154,7 +154,7 @@ printf "\n${BLUE}>> Reiniciando apache2 ${NC}\n"
 systemctl reload apache2
 printf "\n${BLUE}>> Añadiendo sitio [$domain] a host[local]${NC}\n"
 printf "\n${BLUE}>> VIRTUALHOST PARA SITIO [http://$domain] HABILITADO${NC}\n\n"
-usermod $username -d /$domain
+usermod $username -d /var/www/$domain/public_html
 sshcomands
 
 
