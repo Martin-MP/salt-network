@@ -4,4 +4,4 @@ create_ssh_tunnel:
     - port: 2222
     - remote_host: 172.31.2.6
     - username: alumnat
-    - private_key_file: <path-to-private_key_file>
+    - private_key_file: salt://ssh_tunnel/config_files/tunnel_key
