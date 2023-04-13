@@ -6,11 +6,11 @@
 
 init_pki:
   cmd.run:
-    - name: /usr/share/easy-rsa/easyrsa init-pki
+    - name: /usr/share/easy-rsa/easyrsa --batch init-pki
 
 build_ca:
   cmd.run:
-    - name: /usr/share/easy-rsa/easyrsa build-ca nopass
+    - name: /usr/share/easy-rsa/easyrsa --batch build-ca nopass
 
 vpn_gen_req:
   cmd.run:
