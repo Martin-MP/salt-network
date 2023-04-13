@@ -7,15 +7,6 @@
     - require:
       - pkg: openvpn
 
-/etc/openvpn/easy-rsa/vars:
-  file.managed:
-    - source: salt://vpn/config_files/vars
-    - user: root
-    - group: root
-    - mode: 644
-    - require:
-      - pkg: openvpn
-
 /etc/openvpn/easy-rsa/pki:
   file.directory:
     - user: root
