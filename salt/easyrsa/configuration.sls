@@ -12,6 +12,10 @@ build_ca:
   cmd.run:
     - name: /usr/share/easy-rsa/easyrsa --batch build-ca nopass
 
+build_dh:
+  cmd.run:
+    - name: /usr/share/easy-rsa/easyrsa --batch gen-dh
+
 vpn_gen_req:
   cmd.run:
     - name: /usr/share/easy-rsa/easyrsa --batch gen-req vpnserver nopass
