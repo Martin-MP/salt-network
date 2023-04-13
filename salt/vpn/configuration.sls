@@ -20,3 +20,10 @@
     - user: root
     - group: root
     - mode: 644
+
+/root/new_vpn_client.sh:
+  file.managed:
+    - source: salt://vpn/config_files/new_vpn_client.sh
+    - user: root
+    - group: root
+    - mode: 755
