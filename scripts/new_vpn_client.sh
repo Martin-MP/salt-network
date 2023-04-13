@@ -4,10 +4,10 @@ echo -e "\e[1;32mEste script te ayudará a crear los certificados para los clien
 echo -e "\e[1;32m=====================================================================\e[0m"
 read -p "¿Cómo quieres que se llame el certificado? " certificado
 echo "[LOG] Este es el nombre de tu certificado: $certificado"
-cd /usr/share/easy-rsa
+cd /root
 echo -e "[LOG] Generando los certificados y firmandolos"
-./easyrsa --batch gen-req $certificado nopass > /dev/null 2>&1
-./easyrsa --batch sign-req client $certificado > /dev/null 2>&1
+/usr/share/easy-rsa/easyrsa --batch gen-req $certificado nopass > /dev/null 2>&1
+/usr/share/easy-rsa/easyrsa --batch sign-req client $certificado > /dev/null 2>&1
 echo "[LOG] Todos los ficheros han sido creados"
 mkdir /home/templates
 cd /home/templates
@@ -38,9 +38,9 @@ echo -e "[LOG] Realizando la transmisión a $destip y ficheros necesarios"
 cd /home
 mkdir -p /home/$certificado/$certificado
 cp -r /home/templates/$certificado.conf /home/$certificado/$certificado
-cp /usr/share/easy-rsa/pki/ca.crt /home/$certificado/$certificado
-cp /usr/share/easy-rsa/pki/issued/$certificado.crt /home/$certificado/$certificado
-cp /usr/share/easy-rsa/pki/private/$certificado.key /home/$certificado/$certificado
+cp /etc/openvpn/easy-rsa/keys/ca.crt /home/$certificado/$certificado
+cp /root/pki/issued/$certificado.crt /home/$certificado/$certificado
+cp /root/pki/private/$certificado.key /home/$certificado/$certificado
 echo -e "[LOG] Ficheros necesarios ubicados en /home/$certificado/$certificado"
 scp -q -r /home/$certificado/* $user@$destip:$rute
 if [ $? -eq 0 ]; then
