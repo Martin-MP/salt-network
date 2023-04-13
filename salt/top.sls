@@ -7,5 +7,8 @@ base:
     - webserver
   'webhost':
     - webserver
+  'VPNVirgin':
+    - easyrsa
+    - vpn
   'vpnserver':
     - ssh_tunnel
