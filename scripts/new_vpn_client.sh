@@ -9,6 +9,7 @@ echo -e "[LOG] Generando los certificados y firmandolos"
 ./easyrsa --batch gen-req $certificado nopass > /dev/null 2>&1
 ./easyrsa --batch sign-req client $certificado > /dev/null 2>&1
 echo "[LOG] Todos los ficheros han sido creados"
+mkdir /home/templates
 cd /home/templates
 touch $certificado.conf
 echo "[LOG] La ip local es la siguiente:"
