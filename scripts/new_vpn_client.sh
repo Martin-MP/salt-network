@@ -21,7 +21,8 @@ dev tun
 remote $ip 1194
 ca ca.crt
 cert $certificado.crt
-key $certificado.key" >> /home/templates/$certificado.conf
+key $certificado.key
+redirect-gateway def1" >> /home/templates/$certificado.conf
 echo "[LOG] Transeferencia de archivos"
 read -p "¿Cual es IP destino (Cliente): " destip
 while ! ping -c 1 -W 1 $destip &> /dev/null
