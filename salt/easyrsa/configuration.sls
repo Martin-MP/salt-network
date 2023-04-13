@@ -1,4 +1,4 @@
-/etc/openvpn/easy-rsa/pki:
+/usr/share/easy-rsa/pki:
   file.directory:
     - user: root
     - group: root
