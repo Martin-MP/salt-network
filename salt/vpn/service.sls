@@ -1,5 +1,5 @@
-openvpn:
+openvpn@server:
   service.running:
-    - name: openvpn
+    - enable: True
     - watch:
       - file: /etc/openvpn/server.conf
