@@ -1,9 +1,3 @@
-/usr/share/easy-rsa/pki:
-  file.directory:
-    - user: root
-    - group: root
-    - mode: 755
-
 init_pki:
   cmd.run:
     - name: /usr/share/easy-rsa/easyrsa --batch init-pki
