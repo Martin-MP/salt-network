@@ -14,16 +14,16 @@ build_ca:
 
 vpn_gen_req:
   cmd.run:
-    - name: ./usr/share/easy-rsa/easyrsa gen-req vpnserver nopass
+    - name: ./usr/share/easy-rsa/easyrsa --batch gen-req vpnserver nopass
 
 vpn_sign_req:
   cmd.run:
-    - name: ./usr/share/easy-rsa/easyrsa sign-req server vpnserver
+    - name: ./usr/share/easy-rsa/easyrsa --batch sign-req server vpnserver
 
 client1_gen_req:
   cmd.run:
-    - name: ./usr/share/easy-rsa/easyrsa gen-req client1 nopass
+    - name: ./usr/share/easy-rsa/easyrsa --batch gen-req client1 nopass
 
 client1_sign_req:
   cmd.run:
-    - name: ./usr/share/easy-rsa/easyrsa sign-req client client1
+    - name: ./usr/share/easy-rsa/easyrsa --batch sign-req client client1
