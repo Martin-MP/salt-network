@@ -3,29 +3,27 @@
     - user: root
     - group: root
     - mode: 755
-    - require:
-      - pkg: openvpn
 
-/etc/openvpn/easy-rsa/pki:
+init_pki:
   cmd.run:
     - name: ./usr/share/easy-rsa/easyrsa init-pki
 
-/etc/openvpn/easy-rsa/pki/ca.crt:
+build_ca:
   cmd.run:
     - name: ./usr/share/easy-rsa/easyrsa build-ca nopass
 
-/etc/openvpn/easy-rsa/pki/server.req:
+vpn_gen_req:
   cmd.run:
     - name: ./usr/share/easy-rsa/easyrsa gen-req vpnserver nopass
 
-/etc/openvpn/easy-rsa/pki/server.crt:
+vpn_sign_req:
   cmd.run:
     - name: ./usr/share/easy-rsa/easyrsa sign-req server vpnserver
 
-/etc/openvpn/easy-rsa/pki/client1.req:
+client1_gen_req:
   cmd.run:
     - name: ./usr/share/easy-rsa/easyrsa gen-req client1 nopass
 
-/etc/openvpn/easy-rsa/pki/client1.crt:
+client1_sign_req:
   cmd.run:
     - name: ./usr/share/easy-rsa/easyrsa sign-req client client1
