@@ -115,6 +115,7 @@ chmod 755 /var/www/$domain/
 chmod 755 /var/www/$domain/public_html/
 chown root:root /var/www/$domain
 touch /var/www/$domain/public_html/index.html
+chown $username:$group /var/www/$domain/public_html/
 chown $username:$group /var/www/$domain/public_html/index.html
 chmod 755 /var/www/$domain/public_html/index.html
 printf "\n${BLUE}>> Creando archivos de configuracion para sitio [$domain] ${NC}\n"
@@ -149,7 +150,6 @@ systemctl reload apache2
 printf "\n${BLUE}>> Añadiendo sitio [$domain] a host[local]${NC}\n"
 printf "\n${BLUE}>> VIRTUALHOST PARA SITIO [http://$domain] HABILITADO${NC}\n\n"
 usermod $username -d /public_html
-chown $username:$group /public_html
 sshcomands
 
 
