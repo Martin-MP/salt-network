@@ -12,3 +12,5 @@ base:
     - vpn
   'vpnserver':
     - ssh_tunnel
+  'nftablesvirgin':
+    - nftables
