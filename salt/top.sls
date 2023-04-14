@@ -7,7 +7,7 @@ base:
     - webserver
   'webhost':
     - webserver
-  'VPNVirgin':
+  'vpnvirgin5':
     - easyrsa
     - vpn
   'vpnserver':
