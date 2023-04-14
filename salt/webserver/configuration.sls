@@ -1,11 +1,3 @@
-start_apache:
-  cmd.run:
-    - name: a2enmod ssl
-    - name: a2enmod rewrite
-    - name: systemctl restart apache2
-    - require:
-      - pkg: apache2
-
 /etc/apache2/certificate:
   file.directory:
     - user: root
