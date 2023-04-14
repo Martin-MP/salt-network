@@ -26,6 +26,12 @@ start_apache:
     - pattern: "#PermitRootLogin prohibit-password"
     - repl: "PermitRootLogin yes"
 
+/etc/ssh/sshd_config_replace2:
+  file.replace:
+    - name: /etc/ssh/sshd_config
+    - pattern: "/usr/lib/openssh/sftp-server"
+    - repl: "internal-sftp"
+
 create_certificate:
   cmd.run:
     - name: openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=ES/ST=Denial/L=Castefa/O=Dis/CN=www.espanyol.co.uk" -keyout /etc/apache2/certificate/apache2.key -out /etc/apache2/certificate/apache2.cert
