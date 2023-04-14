@@ -5,7 +5,7 @@ base:
     - dhcp_dns
   'webtest':
     - webserver
-  'webhostvirgin':
+  'web0':
     - webserver
   'vpnvirgin5':
     - easyrsa
