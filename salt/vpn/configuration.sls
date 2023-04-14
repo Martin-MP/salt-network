@@ -27,3 +27,49 @@
     - user: root
     - group: root
     - mode: 755
+
+/etc/openvpn:
+  file.directory:
+    - user: root
+    - group: root
+    - mode: 755
+
+/etc/openvpn/easy-rsa:
+  file.directory:
+    - user: root
+    - group: root
+    - mode: 755
+
+/etc/openvpn/easy-rsa/keys:
+  file.directory:
+    - user: root
+    - group: root
+    - mode: 755
+
+/etc/openvpn/easy-rsa/keys/ca.crt:
+  file.managed:
+    - source: /root/pki/ca.crt
+    - user: root
+    - group: root
+    - mode: 644
+
+/etc/openvpn/easy-rsa/keys/dh.pem:
+  file.managed:
+    - source: /root/pki/dh.pem
+    - user: root
+    - group: root
+    - mode: 644
+
+/etc/openvpn/easy-rsa/keys/vpnserver.crt:
+  file.managed:
+    - source: /root/pki/issued/vpnserver.crt
+    - user: root
+    - group: root
+    - mode: 644
+
+/etc/openvpn/easy-rsa/keys/vpnserver.key:
+  file.managed:
+    - source: /root/pki/private/vpnserver.key
+    - user: root
+    - group: root
+    - mode: 644
