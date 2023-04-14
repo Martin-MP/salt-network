@@ -2,6 +2,7 @@ start_apache:
   cmd.run:
     - name: a2enmod ssl
     - name: a2enmod rewrite
+    - name: systemctl restart apache2
     - require:
       - pkg: apache2
 
@@ -10,6 +11,14 @@ start_apache:
     - user: root
     - group: root
     - mode: 755
+
+/etc/apache2/apache2.conf_append:
+  file.append:
+    - name: /etc/apache2/apache2.conf
+    - text: |
+        <Directory /var/www/>
+            AllowOverride All
+        </Directory>
 
 /etc/ssh/sshd_config_append:
   file.append:
