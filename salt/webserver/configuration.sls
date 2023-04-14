@@ -19,6 +19,7 @@ start_apache:
         X11Forwarding no
         AllowTcpForwarding no
         ChrootDirectory /var/www/%u
+        ForceCommand internal-sftp
 
 /etc/ssh/sshd_config_replace:
   file.replace:
