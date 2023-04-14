@@ -11,14 +11,18 @@ start_apache:
     - group: root
     - mode: 755
 
-/etc/ssh/sshd_config:
+/etc/ssh/sshd_config_append:
   file.append:
+    - name: /etc/ssh/sshd_config
     - text: |
         Match group clientes
         X11Forwarding no
         AllowTcpForwarding no
         ChrootDirectory %h
+
+/etc/ssh/sshd_config_replace:
   file.replace:
+    - name: /etc/ssh/sshd_config
     - pattern: "#PermitRootLogin prohibit-password"
     - repl: "PermitRootLogin yes"
 
