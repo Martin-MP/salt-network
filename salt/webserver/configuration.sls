@@ -18,7 +18,7 @@ start_apache:
         Match group clientes
         X11Forwarding no
         AllowTcpForwarding no
-        ChrootDirectory %h
+        ChrootDirectory /var/www/%u
 
 /etc/ssh/sshd_config_replace:
   file.replace:
