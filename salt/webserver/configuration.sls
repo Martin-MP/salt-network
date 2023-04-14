@@ -18,8 +18,6 @@ start_apache:
         X11Forwarding no
         AllowTcpForwarding no
         ChrootDirectory %h
-
-/etc/ssh/sshd_config:
   file.replace:
     - pattern: "#PermitRootLogin prohibit-password"
     - repl: "PermitRootLogin yes"
