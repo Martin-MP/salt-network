@@ -28,12 +28,6 @@
     - group: root
     - mode: 755
 
-/etc/openvpn:
-  file.directory:
-    - user: root
-    - group: root
-    - mode: 755
-
 /etc/openvpn/easy-rsa:
   file.directory:
     - user: root
