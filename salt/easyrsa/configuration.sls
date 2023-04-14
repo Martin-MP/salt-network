@@ -1,29 +1,27 @@
-/etc/openvpn/easy-rsa/pki:
+init_pki:
   cmd.run:
-    - name: /usr/share/easy-rsa/easyrsa init-pki
-    - creates: /etc/openvpn/easy-rsa/pki
+    - name: /usr/share/easy-rsa/easyrsa --batch init-pki
 
-/etc/openvpn/easy-rsa/pki/ca.crt:
+build_ca:
   cmd.run:
-    - name: /usr/share/easy-rsa/easyrsa build-ca nopass
-    - creates: /etc/openvpn/easy-rsa/pki/ca.crt
+    - name: /usr/share/easy-rsa/easyrsa --batch build-ca nopass
 
-/etc/openvpn/easy-rsa/pki/server.req:
+build_dh:
   cmd.run:
-    - name: /usr/share/easy-rsa/easyrsa gen-req vpnserver nopass
-    - creates: /etc/openvpn/easy-rsa/pki/server.req
+    - name: /usr/share/easy-rsa/easyrsa --batch gen-dh
 
-/etc/openvpn/easy-rsa/pki/server.crt:
+vpn_gen_req:
   cmd.run:
-    - name: /usr/share/easy-rsa/easyrsa sign-req server vpnserver
-    - creates: /etc/openvpn/easy-rsa/pki/server.crt
+    - name: /usr/share/easy-rsa/easyrsa --batch gen-req vpnserver nopass
 
-/etc/openvpn/easy-rsa/pki/client1.req:
+vpn_sign_req:
   cmd.run:
-    - name: /usr/share/easy-rsa/easyrsa gen-req client1 nopass
-    - creates: /etc/openvpn/easy-rsa/pki/client1.req
+    - name: /usr/share/easy-rsa/easyrsa --batch sign-req server vpnserver
 
-/etc/openvpn/easy-rsa/pki/client1.crt:
+client1_gen_req:
   cmd.run:
-    - name: /usr/share/easy-rsa/easyrsa sign-req client client1
-    - creates: /etc/openvpn/easy-rsa/pki/client1.crt
+    - name: /usr/share/easy-rsa/easyrsa --batch gen-req client1 nopass
+
+client1_sign_req:
+  cmd.run:
+    - name: /usr/share/easy-rsa/easyrsa --batch sign-req client client1
