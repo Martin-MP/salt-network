@@ -1,5 +1,4 @@
 import os
-import colorama
 
 #os.system("salt '*' state.apply")
 os.system("echo '\033[0;31m'")
