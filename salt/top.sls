@@ -5,10 +5,12 @@ base:
     - dhcp_dns
   'webtest':
     - webserver
-  'webhost':
+  'web0':
     - webserver
-  'VPNVirgin':
+  'vpnvirgin5':
     - easyrsa
     - vpn
   'vpnserver':
     - ssh_tunnel
+  'nftablesvirgin':
+    - nftables

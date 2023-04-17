@@ -109,14 +109,15 @@ done
 printf "\n${BLUE}>> $group creado para [$username] ${NC}\n"
 printf "\n${BLUE}>> Usuario Creado [$username] ${NC}\n"
 printf "\n${BLUE}>> Creando carpetas para [$domain] ${NC}\n"
-mkdir -p /var/www/$domain/public_html/
+mkdir -p /var/www/$username/public_html/
 printf "\n${BLUE}>> Estableciendo permisos para usuario [$username] en sitio [$domain] ${NC}\n"
-chmod 755 /var/www/$domain/
-chmod 755 /var/www/$domain/public_html/
-chown root:root /var/www/$domain
-touch /var/www/$domain/public_html/index.html
-chown $username:$group /var/www/$domain/public_html/index.html
-chmod 755 /var/www/$domain/public_html/index.html
+chmod 755 /var/www/$username/
+chmod 755 /var/www/$username/public_html/
+chown root:root /var/www/$username
+touch /var/www/$username/public_html/index.html
+chown $username:$group /var/www/$username/public_html/
+chown $username:$group /var/www/$username/public_html/index.html
+chmod 755 /var/www/$username/public_html/index.html
 printf "\n${BLUE}>> Creando archivos de configuracion para sitio [$domain] ${NC}\n"
 touch /etc/apache2/sites-available/$domain.conf
 echo "<VirtualHost *:80>
@@ -127,19 +128,13 @@ Redirect / https://$domain
 ServerAdmin admin@$domain
 ServerName $domain
 ServerAlias www.$domain
-DocumentRoot /var/www/$domain/public_html
+DocumentRoot /var/www/$username/public_html
 ErrorLog ${APACHE_LOG_DIR}/error.log
 CustomLog ${APACHE_LOG_DIR}/access.log combined
 SSLEngine on
 SSLCertificateFile /etc/apache2/certificate/apache2.cert
 SSLCertificateKeyFile /etc/apache2/certificate/apache2.key
 </VirtualHost>" > /etc/apache2/sites-available/$domain.conf
-echo "Match Group $group
-ChrootDirectory /var/www/$domain/
-AllowTCPForwarding no
-X11Forwarding no
-ForceCommand internal-sftp
-" >> /etc/ssh/sshd_config
 systemctl restart ssh
 printf "\n${BLUE}>> Habilitando sitio [$domain] ${NC}\n\n"
 a2ensite $domain.conf > /dev/null 2>&1
@@ -149,12 +144,12 @@ echo "<!DOCTYPE html>
 <h1>La teva pagina $username</h1>
 <h2>puja el teu $domain</h2>
 </body>
-</html>" >> /var/www/$domain/public_html/index.html
+</html>" >> /var/www/$username/public_html/index.html
 printf "\n${BLUE}>> Reiniciando apache2 ${NC}\n"
 systemctl reload apache2
 printf "\n${BLUE}>> Añadiendo sitio [$domain] a host[local]${NC}\n"
 printf "\n${BLUE}>> VIRTUALHOST PARA SITIO [http://$domain] HABILITADO${NC}\n\n"
-usermod $username -d /var/www/$domain/public_html
+usermod $username -d /public_html
 sshcomands
 
 
