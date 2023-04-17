@@ -1,4 +1,4 @@
-nftables:
+nftables.service:
   service.running:
     - enable: True
     - watch:
