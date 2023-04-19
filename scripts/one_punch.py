@@ -7,7 +7,7 @@ class Minion:
         self.name = name
         self.ip = ip
         self.up = False
-    
+
     def set_up(self):
         self.up = True
 
@@ -36,7 +36,10 @@ while True:
         break
 
 
-import subprocess
 # Ejecuta el comando
-comando = "salt 'NFTABLES' state.apply ; salt 'DHCPDNS' state.apply; salt '*' state.apply"
-subprocess.call(comando, shell=True)
+NFTABLES = "salt 'NFTABLES' state.apply"
+DHCP = "salt 'DHCPDNS' state.apply"
+TODOS = "salt '*' state.apply"
+subprocess.call(NFTABLES, shell=True)
+subprocess.call(DHCP, shell=True)
+subprocess.call(TODOS, shell=True)
