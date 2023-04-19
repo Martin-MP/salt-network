@@ -1,16 +1,15 @@
 base:
   '*':
     - vim
-  'dhcp-dns-minion':
+  'dhcpdns':
     - dhcp_dns
-  'webtest':
+  'webhost':
     - webserver
-  'web0':
-    - webserver
-  'vpnvirgin5':
+  'vpnserver':
     - easyrsa
     - vpn
-  'vpnserver':
     - ssh_tunnel
-  'nftablesvirgin':
+  'nftables':
     - nftables
+#  'minion1':
+#    - EstadoX
