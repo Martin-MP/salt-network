@@ -1,5 +1,6 @@
 import argparse
 import os
+import subprocess
 
 class Minion:
     def __init__(self, name, ip):
@@ -33,3 +34,9 @@ while True:
                 print(minion.name + " is down!")
     if all_up:
         break
+
+
+import subprocess
+# Ejecuta el comando
+comando = "salt 'NFTABLES' state.apply ; salt 'DHCPDNS' state.apply; salt '*' state.apply"
+subprocess.call(comando, shell=True)
