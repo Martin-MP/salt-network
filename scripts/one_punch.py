@@ -32,6 +32,5 @@ while True:
             else:
                 all_up = False
                 print(minion.name + " is down!")
-            break
     if all_up:
         break
