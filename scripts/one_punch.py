@@ -25,7 +25,6 @@ while True:
             # ping the minion
             response = os.system("ping -c 1 " + minion.ip)
             print("TRYING TO PING " + minion.name)
-            print(response)
             if response == 0:
                 minion.set_up()
                 print(minion.name + " is up!")
