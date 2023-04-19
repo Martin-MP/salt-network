@@ -37,3 +37,5 @@
 create_certificate:
   cmd.run:
     - name: openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=ES/ST=Denial/L=Castefa/O=Dis/CN=www.espanyol.co.uk" -keyout /etc/apache2/certificate/apache2.key -out /etc/apache2/certificate/apache2.cert
+    - name: a2enmod ssl
+    - name: a2enmod rewrite
