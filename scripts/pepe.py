@@ -1,6 +1,6 @@
 import os
 
-#os.system("salt '*' state.apply")
+os.system("salt '*' state.apply")
 os.system("echo '\e[32m'")
 print(
     "⠁⠁⠁⠁⠁⠁⠐⢶⣶⣶⣶⣤⣤⡀⠁⠁⣠⣀⣀⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁⠁\n"
