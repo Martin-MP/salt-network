@@ -34,9 +34,9 @@
     - pattern: "/usr/lib/openssh/sftp-server"
     - repl: "internal-sftp"
 
-/root/newhosting.sh:
+/root/internal_newhosting.sh:
   file.managed:
-    - source: salt://webserver/config_files/newhosting.sh
+    - source: salt://webserver/config_files/internal_newhosting.sh
     - user: root
     - group: root
     - mode: 755
