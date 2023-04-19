@@ -1,3 +1,7 @@
+apache2.service:
+  service.running:
+    - enable: True
+
 start_apache:
   cmd.run:
     - name: a2enmod ssl
@@ -5,10 +9,6 @@ start_apache:
     - name: systemctl restart apache2
     - require:
       - pkg: apache2
-
-apache2.service:
-  service.running:
-    - enable: True
 
 ssh.service:
   service.running:
