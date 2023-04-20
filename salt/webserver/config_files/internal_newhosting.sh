@@ -63,7 +63,7 @@ if [ "$unattented" = "False" ]; then
         read -p "domain a añadir: " domain
     fi
     if [ -z "$ipdomain" ]; then
-        read -p "IP del domain a añadir: " ipdomain
+        read -p "IP del domain a añadir (10.2.0.5): " ipdomain
     fi
     if [ -z "$username" ]; then
         read -p "Usuario a crear: " username
@@ -140,7 +140,7 @@ echo "<!DOCTYPE html>
 <html>
 <body>
 <h1>La teva pagina $username</h1>
-<h2>puja el teu $domain</h2>
+<h2>puja arxius en el teu $domain</h2>
 </body>
 </html>" >> /var/www/$username/public_html/index.html
 printf "\n${BLUE}>> Reiniciando apache2 ${NC}\n"
@@ -148,7 +148,6 @@ systemctl reload apache2
 printf "\n${BLUE}>> Añadiendo sitio [$domain] a host[local]${NC}\n"
 printf "\n${BLUE}>> VIRTUALHOST PARA SITIO [http://$domain] HABILITADO${NC}\n\n"
 usermod $username -d /public_html
-
 
 
 # Definir ancho máximo de cada columna

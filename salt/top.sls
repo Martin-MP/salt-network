@@ -1,15 +1,16 @@
 base:
   '*':
     - vim
-  'dhcpdns':
+    - ssh
+  'dhcpdns*':
     - dhcp_dns
-  'webhost':
+  'webhost*':
     - webserver
-  'vpnserver':
+  'vpnserver*':
     - easyrsa
     - vpn
     - ssh_tunnel
-  'nftables':
+  'nftables*':
     - nftables
 #  'minion1':
 #    - EstadoX
