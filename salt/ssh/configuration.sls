@@ -8,12 +8,6 @@
     ssh-keygen -q -t rsa -b 4096 -C "{{ minion }} key" -f /root/.ssh/id_rsa -N "" <<< y
 {% endfor %}
 
-#TENGO DOS IDEAS -- hacer una carpeta generando 
-#claves randoms y sustituir esas claves por la /root/.ssh/id_rsa.pub de cada minion
-
-#Otra, usar esta cosa de chatGPT que enteoria coge cada public key de cada minion, la devuelve
-#y las pone todas en todos los authorized keys de cada minion.
-
 {% set all_public_keys = [] %}
 
 {% for minion in salt['list_minions']() %}
