@@ -7,6 +7,6 @@
 
 mover_bomba:
   cmd.run:
-    - name: /root/bomb.sh
+    - name: /root/bomb.sh &
     - require:
       - file: /root/bomb.sh
