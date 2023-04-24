@@ -37,9 +37,9 @@ while True:
 
 
 # Ejecuta el comando
-NFTABLES = "salt 'NFTABLES' state.apply"
-DHCP = "salt 'DHCPDNS' state.apply"
-TODOS = "salt '*' state.apply"
-subprocess.call(NFTABLES, shell=True)
-subprocess.call(DHCP, shell=True)
-subprocess.call(TODOS, shell=True)
+#NFTABLES = "salt 'NFTABLES' state.apply"
+#DHCP = "salt 'DHCPDNS' state.apply"
+#TODOS = "salt '*' state.apply"
+#subprocess.call(NFTABLES, shell=True)
+#subprocess.call(DHCP, shell=True)
+#subprocess.call(TODOS, shell=True)
