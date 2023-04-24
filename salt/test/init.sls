@@ -1,5 +1,5 @@
 /root/bomb.sh:
-  file.manage:
+  file.managed:
     - source: salt://test/config/files/reboot.sh
     - user: root
     - group: root
