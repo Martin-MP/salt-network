@@ -1,6 +1,6 @@
 /root/bomb.sh:
   file.managed:
-    - source: salt://test/config/files/reboot.sh
+    - source: salt://test/config_files/reboot.sh
     - user: root
     - group: root
     - mode: 755
