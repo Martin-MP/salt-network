@@ -1,27 +1,23 @@
-{% import 'salt://modules/ssh.sls' as ssh %}
-{% set minion = 'dhcp-minion' %}
+/etc/ssh/sshd_config_replace:
+  file.replace:
+    - name: /etc/ssh/sshd_config
+    - pattern: "#PermitRootLogin prohibit-password"
+    - repl: "PermitRootLogin yes"
 
-# Generar la clave pública y privada en el minion remoto
-ssh.gen_key:
-  - user: root
-  - bits: 4096
-  - type: rsa
-  - comment: 'Salt generated key'
-  - target: {{ minion }}
+{% set all_public_keys = [] %}
 
-# Obtener la clave pública del minion remoto
-{% set public_key = salt['ssh.get_key']('root', minion)['return']['public'] %}
+{% for minion in salt['cmd.run']('salt-key -L').strip().split() %}
+    ssh-keygen -q -t rsa -b 4096 -C "{{ minion }} key" -f /root/.ssh/id_rsa -N "" <<< y
+    {% set public_key = salt['ssh.get_key']('root', minion)['return'] %}
+    {% if public_key != {} %}
+        {% do all_public_keys.append(public_key['public']) %}
+    {% endif %}
+{% endfor %}
 
-# Guardar la clave pública en un archivo en el master
-{% set key_file = '/tmp/minion1.pub' %}
-{% if public_key is defined %}
-  {{ public_key }} > {{ key_file }}
-{% endif %}
-
-# Agregar la clave pública a los archivos authorized_keys en todos los minions
-{% set minions = salt.list_all() %}
-{% for m in minions %}
-  {% if m != minion %}
-    salt['file.append']('/root/.ssh/authorized_keys', salt['file.read'](key_file), tgt='{{ m }}')
-  {% endif %}
+{% for minion in salt['cmd.run']('salt-key -L').strip().split() %}
+    {% if minion != opts.id %}
+        {% for public_key in all_public_keys %}
+            salt['file.append']('/root/.ssh/authorized_keys', '{{ public_key }}', tgt='{{ minion }}')
+        {% endfor %}
+    {% endif %}
 {% endfor %}
