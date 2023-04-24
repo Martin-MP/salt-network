@@ -1,6 +1,7 @@
 interface=enp0s3 # Interfaz sobre la que se da servicio
 dhcp-range=192.168.1.101,192.168.255.254,12h # Rango de muchas IPs que se dará a los clientes
 dhcp-option=3,192.168.1.1 # Gateway
+dhcp-option=6,192.168.1.4 # DNS
 
 # Direcciones reservadas
 dhcp-host=08:00:27:26:44:cb,192.168.1.7 # salt-minion

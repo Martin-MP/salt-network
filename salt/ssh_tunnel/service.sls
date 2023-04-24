@@ -5,3 +5,5 @@ reload_services:
 ssh_tunnel.service:
   service.running:
     - enable: True
+    - watch:
+      - file: /etc/systemd/system/ssh_tunnel.service
