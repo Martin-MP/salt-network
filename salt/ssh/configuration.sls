@@ -4,6 +4,6 @@
     - pattern: "#PermitRootLogin prohibit-password"
     - repl: "PermitRootLogin yes"
 
-hola:
-  - cmd.run:
-    - sh-keygen -q -t rsa -b 4096 -C
+build_ca:
+  cmd.run:
+    - name: ssh-keygen -t rsa -b 4096 -C
