@@ -24,7 +24,7 @@ minions = {
 }
 while True:
     all_up = True
-    for minion in minion_list:
+    for minion in minions.values():
         if not minion.up:
             response = os.system("ping -c 1 " + minion.ip)
             print("TRYING TO PING " + minion.name)
