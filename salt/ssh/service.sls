@@ -1,4 +1,4 @@
-ssh:
+sshservice:
   service.running:
     - name: ssh
     - enable: True
