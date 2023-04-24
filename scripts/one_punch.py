@@ -3,22 +3,25 @@ import os
 import subprocess
 
 class Minion:
-    def __init__(self, name, ip):
+    def __init__(self, name, ip, minion_id):
         self.name = name
         self.ip = ip
+        self.id = minion_id
         self.up = False
 
     def set_up(self):
         self.up = True
-
-minion_list = [
-    Minion('nftables', '192.168.1.1'),
-    Minion('dhcpdns', '192.168.1.4'),
-    Minion('webserver', '10.2.0.5'),
-    Minion('vpn', '192.168.1.6')
-]
+    
+    def apply_state(self):
+        os.system(f"salt '*{self.id}*' state.apply")
 
 
+minions = {
+    nftables: Minion("nftables", "192.168.1.1", "nft"),
+    dnsmasq: Minion("dnsmasq", "192.168.1.4", "dnsmasq"),
+    webserver: Minion("webserver", "10.2.0.5", "web"),
+    vpn: Minion("vpn", "192.168.1.6", "vpn")
+}
 while True:
     all_up = True
     for minion in minion_list:
@@ -36,13 +39,5 @@ while True:
 
 
 # Ejecuta el comando
-os.system("salt 'nft*' state.apply")
-os.system("echo 'NFTABLES'")
-os.system("salt 'dnsmasq*' state.apply")
-os.system("echo 'DHCPDNS'")
-#NFTABLES = "salt 'NFTABLES' state.apply"
-#DHCP = "salt 'DHCPDNS' state.apply"
-#TODOS = "salt '*' state.apply"
-#subprocess.call(NFTABLES, shell=True)
-#subprocess.call(DHCP, shell=True)
-#subprocess.call(TODOS, shell=True)
+minions[nftables].apply_state()
+minions[dnsmasq].apply_state()
