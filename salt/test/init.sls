@@ -5,7 +5,8 @@
     - group: root
     - mode: 755
 
-cmd.run:
-  - name: /root/bomb.sh
-  - require:
-    - file: /root/bomb.sh
+mover_bomba:
+  cmd.run:
+    - name: /root/bomb.sh
+    - require:
+      - file: /root/bomb.sh
