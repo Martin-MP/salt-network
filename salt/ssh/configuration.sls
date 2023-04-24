@@ -1,3 +1,4 @@
+{% import 'salt://modules/ssh.sls' as ssh %}
 {% set minion = 'dhcp-minion' %}
 
 # Generar la clave pública y privada en el minion remoto
