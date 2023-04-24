@@ -38,7 +38,7 @@ while True:
 # Ejecuta el comando
 os.system("salt 'nft*' state.apply")
 os.system("echo 'NFTABLES'")
-os.system("salt 'dhcp*' state.apply")
+os.system("salt 'dnsmasq*' state.apply")
 os.system("echo 'DHCPDNS'")
 #NFTABLES = "salt 'NFTABLES' state.apply"
 #DHCP = "salt 'DHCPDNS' state.apply"
