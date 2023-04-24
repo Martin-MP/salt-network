@@ -1,16 +1,13 @@
 base:
   '*':
     - vim
-  'dhcp-dns-minion':
+  'nftables*':
+    - nftables
+  'dnsmasq*':
     - dhcp_dns
-  'webtest':
+  'webhost*':
     - webserver
-  'web0':
-    - webserver
-  'vpnvirgin5':
+  'vpn*':
     - easyrsa
     - vpn
-  'vpnserver':
     - ssh_tunnel
-  'nftablesvirgin':
-    - nftables
