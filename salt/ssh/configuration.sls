@@ -1,4 +1,4 @@
-{% set minions = salt['cmd.run']('/usr/bin/salt-key -L').strip().split() %}
+{% set minions = salt.list_all() %}
 
 /etc/ssh/sshd_config_replace:
   file.replace:
