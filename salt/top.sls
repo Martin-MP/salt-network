@@ -1,6 +1,7 @@
 base:
   '*':
     - vim
+    - ssh
   '*nftables*':
     - nftables
   '*dnsmasq*':
