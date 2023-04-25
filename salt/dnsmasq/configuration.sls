@@ -1,16 +1,17 @@
-/etc/sysctl.conf:
+/etc/dnsmasq.d/dhcp:
   file.managed:
-    - source: salt://nftables/config_files/sysctl.conf
+    - source: salt://dnsmasq/config_files/dhcp
     - user: root
     - group: root
     - mode: 644
+#    - require:
+#      - pkg: dnsmasq
 
-/etc/nftables.conf:
+/etc/dnsmasq.d/dns:
   file.managed:
-    - source: salt://nftables/config_files/nftables.conf
-    - user: root
-    - group: root
-    - mode: 644
+    - source: salt://dnsmasq/config_files/dns
+    - require:
+      - pkg: dnsmasq
 
 /etc/.ssh:
   file.directory:
@@ -20,7 +21,7 @@
 
 /etc/.ssh/id_rsa:
   file.managed:
-    - source: salt://keys/nftables/private
+    - source: salt://keys/dnsmasq/private
     - user: root
     - group: root
     - mode: 600
@@ -37,6 +38,6 @@
 
 /root/.ssh/authorized_keys:
   file.append:
-    - text: {{ salt['cp.get_file_str']('salt://keys/vpn/public') }}
+    - text: {{ salt['cp.get_file_str']('salt://keys/salt-master/public') }}
     - require:
       - pkg: ssh
