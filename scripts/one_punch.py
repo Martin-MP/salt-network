@@ -17,7 +17,7 @@ class Minion:
             i = 1
             while os.path.isfile(f"{base_path}{base_name}-{i}.log"):
                 i += 1
-            self.log_name = f"{base_name}-{i}.log"
+            self.log_name = f"{base_name}_{i}.log"
         else:
             self.log_name = f"{base_name}.log"
 
