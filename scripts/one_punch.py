@@ -35,9 +35,9 @@ class Minion:
     def apply_state(self):
         pid_code = os.system(f"salt '*{self.id}*' state.apply > /root/salt_logs/{self.log_name} 2>&1")
         if pid_code == 0:
-            print(f"Successfully applied state on {self.name}")
+            print(f"\033[92mSuccessfully applied state on {self.name}\033[0m")
         else:
-            print(f"Failed to apply state on {self.name}. See /root/salt_logs/{self.log_name} for details")
+            print(f"\033[91mFailed to apply state on {self.name}. See /root/salt_logs/{self.log_name} for details\033[0m")
 
 
 def check_all_up(timeout=20):
