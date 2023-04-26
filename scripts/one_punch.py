@@ -1,7 +1,7 @@
-import argparse
 import os
-import subprocess
 import time
+import argparse
+import subprocess
 
 class Minion:
     def __init__(self, name, ip, minion_id):
