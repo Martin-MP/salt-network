@@ -1,6 +1,7 @@
 import argparse
 import os
 import subprocess
+import time
 
 class Minion:
     def __init__(self, name, ip, minion_id):
@@ -11,9 +12,30 @@ class Minion:
 
     def set_up(self):
         self.up = True
+
+    def check_up(self):
+        response = os.system("ping -c 1 " + self.ip)
+        if response == 0:
+            self.set_up()
+            return True
+        else:
+            return False
     
     def apply_state(self):
         os.system(f"salt '*{self.id}*' state.apply")
+
+
+def check_all_up(timeout=20):
+    start_time = time.time()
+    while any(not minion.up for minion in minions.values()):
+        for minion in minions.values():
+            if not minion.up:
+                if minion.check_up():
+                    print(minion.name + " is up!")
+                else:
+                    print(minion.name + " is down!")
+        if time.time() - start_time > timeout:
+            raise TimeoutError(f"{timeout} seconds timeout while waiting for minions to start up")
 
 
 minions = {
@@ -22,22 +44,5 @@ minions = {
     webserver: Minion("webserver", "10.2.0.5", "web"),
     vpn: Minion("vpn", "192.168.1.6", "vpn")
 }
-while True:
-    all_up = True
-    for minion in minions.values():
-        if not minion.up:
-            response = os.system("ping -c 1 " + minion.ip)
-            print("TRYING TO PING " + minion.name)
-            if response == 0:
-                minion.set_up()
-                print(minion.name + " is up!")
-            else:
-                all_up = False
-                print(minion.name + " is down!")
-    if all_up:
-        break
-
-
-# Ejecuta el comando
 minions[nftables].apply_state()
 minions[dnsmasq].apply_state()
