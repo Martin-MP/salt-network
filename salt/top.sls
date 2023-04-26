@@ -5,7 +5,7 @@ base:
   '*nftables*':
     - nftables
   '*dnsmasq*':
-    - dhcp_dns
+    - dnsmasq
   '*webhost*':
     - webserver
   '*vpn*':
