@@ -39,10 +39,10 @@ def check_all_up(timeout=20):
 
 
 minions = {
-    nftables: Minion("nftables", "192.168.1.1", "nft"),
-    dnsmasq: Minion("dnsmasq", "192.168.1.4", "dnsmasq"),
-    webserver: Minion("webserver", "10.2.0.5", "web"),
-    vpn: Minion("vpn", "192.168.1.6", "vpn")
+    "nftables": Minion("nftables", "192.168.1.1", "nft"),
+    "dnsmasq": Minion("dnsmasq", "192.168.1.4", "dnsmasq"),
+    "webserver": Minion("webserver", "10.2.0.5", "web"),
+    "vpn": Minion("vpn", "192.168.1.6", "vpn")
 }
 minions[nftables].apply_state()
 minions[dnsmasq].apply_state()
