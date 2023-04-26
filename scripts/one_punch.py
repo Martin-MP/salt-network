@@ -44,8 +44,8 @@ minions = {
     "webserver": Minion("webserver", "10.2.0.5", "web"),
     "vpn": Minion("vpn", "192.168.1.6", "vpn")
 }
-minions[nftables].apply_state()
-minions[dnsmasq].apply_state()
+minions["nftables"].apply_state()
+minions["dnsmasq"].apply_state()
 other_minions = [minion for minion in minions.values() if minion not in [nftables, dnsmasq]]
 for minion in other_minions:
     minion.apply_state()
