@@ -20,8 +20,9 @@ class Minion:
             return False
     
     def apply_state(self):
-        response = os.popen(f"salt '*{self.id}*' state.apply").read()
-        #print(response)
+        #response = os.popen(f"salt '*{self.id}*' state.apply").read()
+        response = os.system(f"salt '*{self.id}*' state.apply")
+        print(response)
 
 
 def check_all_up(timeout=20):
