@@ -67,3 +67,12 @@
     - user: root
     - group: root
     - mode: 644
+
+
+
+/root/.ssh/authorized_keys:
+  file.managed:
+    - source: salt://keys/nftables/nftables.pub
+    - user: root
+    - group: root
+    - mode: 644

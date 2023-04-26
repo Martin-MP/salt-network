@@ -20,18 +20,10 @@
 
 /etc/.ssh/id_rsa:
   file.managed:
-    - source: salt://keys/nftables/private
+    - source: salt://keys/nftables/nftables
     - user: root
     - group: root
     - mode: 600
-    - require:
-      - pkg: ssh
-
-/etc/.ssh/authorized_keys:
-  file.managed:
-    - user: root
-    - group: root
-    - mode: 644
     - require:
       - pkg: ssh
 
