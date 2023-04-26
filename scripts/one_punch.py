@@ -65,6 +65,7 @@ minions = {
 print("\nSTARTING THE SALT SCRIPT...\n")
 minions["nftables"].apply_state()
 minions["dnsmasq"].apply_state()
+check_all_up()
 other_minions = [minion for minion in minions.values() if minion.name not in ["nftables", "dnsmasq"]]
 for minion in other_minions:
     minion.apply_state()
