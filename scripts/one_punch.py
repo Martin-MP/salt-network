@@ -1,6 +1,5 @@
 import os
 import time
-import argparse
 import subprocess
 
 class Minion:
@@ -22,7 +21,8 @@ class Minion:
             return False
     
     def apply_state(self):
-        os.system(f"salt '*{self.id}*' state.apply")
+        response = os.system(f"salt '*{self.id}*' state.apply")
+        #print(response)
 
 
 def check_all_up(timeout=20):
@@ -44,8 +44,9 @@ minions = {
     "webserver": Minion("webserver", "10.2.0.5", "web"),
     "vpn": Minion("vpn", "192.168.1.6", "vpn")
 }
-minions["nftables"].apply_state()
 minions["dnsmasq"].apply_state()
-other_minions = [minion for minion in minions.values() if minion.name not in ["nftables", "dnsmasq"]]
-for minion in other_minions:
-    minion.apply_state()
+#minions["nftables"].apply_state()
+#minions["dnsmasq"].apply_state()
+#other_minions = [minion for minion in minions.values() if minion.name not in ["nftables", "dnsmasq"]]
+#for minion in other_minions:
+#    minion.apply_state()
