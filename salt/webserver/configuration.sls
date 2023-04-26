@@ -22,13 +22,7 @@
         ChrootDirectory /var/www/%u
         ForceCommand internal-sftp
 
-/etc/ssh/sshd_config_replace:
-  file.replace:
-    - name: /etc/ssh/sshd_config
-    - pattern: "#PermitRootLogin prohibit-password"
-    - repl: "PermitRootLogin yes"
-
-/etc/ssh/sshd_config_replace2:
+internal-sftp-config:
   file.replace:
     - name: /etc/ssh/sshd_config
     - pattern: "/usr/lib/openssh/sftp-server"
