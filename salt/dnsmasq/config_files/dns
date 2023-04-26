@@ -1,4 +1,7 @@
 server=172.31.0.1
 address=/wikipedia.org/
 address=/salt-master/192.168.1.5
-address=/webserver.com/10.2.0.5
+address=/webserver/10.2.0.5
+address=/nftables/192.168.1.1
+address=/dnsmasq/192.168.1.4
+address=/vpn/192.168.1.6
