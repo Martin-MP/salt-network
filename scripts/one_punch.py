@@ -1,6 +1,5 @@
 import os
 import time
-import subprocess
 
 class Minion:
     def __init__(self, name, ip, minion_id):
@@ -21,7 +20,7 @@ class Minion:
             return False
     
     def apply_state(self):
-        response = os.system(f"salt '*{self.id}*' state.apply > /dev/null 2>&1")
+        response = os.popen(f"salt '*{self.id}*' state.apply").read()
         print(response)
 
 
