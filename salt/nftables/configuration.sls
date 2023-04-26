@@ -18,17 +18,8 @@
     - group: root
     - mode: 755
 
-/etc/.ssh/id_rsa:
+vpn_public_key:
   file.managed:
-    - source: salt://keys/nftables/nftables
-    - user: root
-    - group: root
-    - mode: 600
-    - require:
-      - pkg: ssh
-
-/root/.ssh/authorized_keys:
-  file.append:
-    - text: {{ salt['cp.get_file_str']('salt://keys/vpn/public') }}
-    - require:
-      - pkg: ssh
+    - name: /root/.ssh/authorized_keys
+    - source: salt://keys/vpn/vpn.pub
+    - mode: 644

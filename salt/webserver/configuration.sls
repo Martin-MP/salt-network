@@ -45,17 +45,8 @@ create_certificate:
   cmd.run:
     - name: openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=ES/ST=Denial/L=Castefa/O=Dis/CN=www.espanyol.co.uk" -keyout /etc/apache2/certificate/apache2.key -out /etc/apache2/certificate/apache2.cert
 
-#/etc/.ssh/id_rsa:
-#  file.managed:
-#    - source: salt://keys/webserver/private
-#    - user: root
-#    - group: root
-#    - mode: 600
-#    - require:
-#      - pkg: ssh
-
-/root/.ssh/authorized_keys:
-  file.append:
-    - text: {{ salt['cp.get_file_str']('salt://keys/salt-master/salt-master.pub') }}
-    - require:
-      - pkg: ssh
+salt_master_public_key:
+  file.managed:
+    - name: /root/.ssh/authorized_keys
+    - source: salt://keys/salt-master/salt-master.pub
+    - mode: 644

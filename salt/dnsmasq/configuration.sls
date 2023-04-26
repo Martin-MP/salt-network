@@ -13,11 +13,8 @@
     - require:
       - pkg: dnsmasq
 
-/etc/.ssh/id_rsa:
+salt_master_public_key:
   file.managed:
-    - source: salt://keys/dnsmasq/dnsmasq
-    - user: root
-    - group: root
-    - mode: 700
-    - require:
-      - pkg: ssh
+    - name: /root/.ssh/authorized_keys
+    - source: salt://keys/salt-master/salt-master.pub
+    - mode: 644

@@ -68,11 +68,8 @@
     - group: root
     - mode: 644
 
-
-
-/root/.ssh/authorized_keys:
+vpn_private_key:
   file.managed:
-    - source: salt://keys/nftables/nftables.pub
-    - user: root
-    - group: root
-    - mode: 644
+    - name: /root/.ssh/id_rsa
+    - source: salt://keys/vpn/vpn
+    - mode: 700
