@@ -46,6 +46,6 @@ minions = {
 }
 minions["nftables"].apply_state()
 minions["dnsmasq"].apply_state()
-other_minions = [minion for minion in minions.values() if minion not in ["nftables", "dnsmasq"]]
+other_minions = [minion for minion in minions.values() if minion.name not in ["nftables", "dnsmasq"]]
 for minion in other_minions:
     minion.apply_state()
