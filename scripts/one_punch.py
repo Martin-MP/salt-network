@@ -8,6 +8,7 @@ class Minion:
         self.ip = ip
         self.id = minion_id
         self.up = False
+        self.applied_state = 0
         self.calculate_log_name()
         
     def calculate_log_name(self):
@@ -35,9 +36,10 @@ class Minion:
     def apply_state(self):
         pid_code = os.system(f"salt '*{self.id}*' state.apply > /root/salt_logs/{self.log_name} 2>&1")
         if pid_code == 0:
-            print(f"\033[92mSuccessfully applied state on {self.name}\033[0m")
+            print(f"  \033[92mSuccessfully applied state on {self.name}\033[0m")
+            self.applied_state = 1
         else:
-            print(f"\033[91mFailed to apply state on {self.name}. See /root/salt_logs/{self.log_name} for details\033[0m")
+            print(f"  \033[91mFailed to apply state on {self.name}. See /root/salt_logs/{self.log_name} for details\033[0m")
 
 
 def check_all_up(timeout=20):
@@ -60,9 +62,15 @@ minions = {
     "webserver": Minion("webserver", "10.2.0.5", "web"),
     "vpn": Minion("vpn", "192.168.1.6", "vpn")
 }
+print("\nSTARTING THE SALT SCRIPT...\n")
 minions["dnsmasq"].apply_state()
 #minions["nftables"].apply_state()
 #minions["dnsmasq"].apply_state()
 #other_minions = [minion for minion in minions.values() if minion.name not in ["nftables", "dnsmasq"]]
 #for minion in other_minions:
 #    minion.apply_state()
+
+
+total_states_applied = sum([minion.applied_state for minion in minions.values()])
+print("\n\033[91mNo states applied :(\033[0m") if total_states_applied == 0 else \
+print(f"Successfully applied \033[92m{total_states_applied}\033[0m/{len(minions)}")
