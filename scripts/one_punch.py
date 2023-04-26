@@ -22,7 +22,7 @@ class Minion:
     
     def apply_state(self):
         response = os.system(f"salt '*{self.id}*' state.apply > /dev/null 2>&1")
-        #print(response)
+        print(response)
 
 
 def check_all_up(timeout=20):
