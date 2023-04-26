@@ -2,6 +2,7 @@ import os
 import time
 
 class Minion:
+
     def __init__(self, name, ip, minion_id):
         self.name = name
         self.ip = ip
@@ -50,7 +51,8 @@ def check_all_up(timeout=20):
         if time.time() - start_time > timeout:
             raise TimeoutError(f"{timeout} seconds timeout while waiting for minions to start up")
 
-
+if not os.path.isdir("/root/salt_logs"):
+    os.mkdir("/root/salt_logs")
 minions = {
     "nftables": Minion("nftables", "192.168.1.1", "nft"),
     "dnsmasq": Minion("dnsmasq", "192.168.1.4", "dnsmasq"),
