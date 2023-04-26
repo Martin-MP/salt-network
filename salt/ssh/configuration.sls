@@ -9,3 +9,9 @@
     - user: root
     - group: root
     - mode: 700
+
+/root/.ssh/authorized_keys:
+  file.managed:
+    - user: root
+    - group: root
+    - mode: 644
