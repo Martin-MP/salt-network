@@ -13,7 +13,7 @@ class Minion:
         self.up = True
 
     def check_up(self):
-        response = os.system("ping -c 1 " + self.ip)
+        response = os.system(f"ping -c 1 {self.ip} > /dev/null 2>&1")
         if response == 0:
             self.set_up()
             return True
@@ -21,7 +21,7 @@ class Minion:
             return False
     
     def apply_state(self):
-        response = os.system(f"salt '*{self.id}*' state.apply")
+        response = os.system(f"salt '*{self.id}*' state.apply > /dev/null 2>&1")
         #print(response)
 
 
