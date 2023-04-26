@@ -11,14 +11,15 @@ class Minion:
         self.calculate_log_name()
         
     def calculate_log_name(self):
-        base_path = f"/root/salt_logs/{time.strftime('%Y%m%d')}-{self.name}.log"
-        if os.path.isfile(base_path):
+        base_name = f"{time.strftime('%Y%m%d')}-{self.name}"
+        base_path = "/root/salt_logs/"
+        if os.path.isfile(f"{base_path}{base_name}.log"):
             i = 1
-            while os.path.isfile(f"{base_path}_{i}"):
+            while os.path.isfile(f"{base_path}{base_name}-{i}.log"):
                 i += 1
-            self.log_name = f"{self.name}_{i}.log"
+            self.log_name = f"{base_name}-{i}.log"
         else:
-            self.log_name = f"{self.name}.log"
+            self.log_name = f"{base_name}.log"
 
     def set_up(self):
         self.up = True
