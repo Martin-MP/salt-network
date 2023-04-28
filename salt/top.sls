@@ -1,10 +1,11 @@
 base:
   '*':
     - vim
+    - ssh
   '*nftables*':
     - nftables
   '*dnsmasq*':
-    - dhcp_dns
+    - dnsmasq
   '*webhost*':
     - webserver
   '*vpn*':

@@ -3,6 +3,3 @@ apache2:
 
 openssl:
   pkg.installed
-
-ssh:
-  pkg.installed

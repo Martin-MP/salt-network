@@ -8,8 +8,9 @@ apache2.service:
   service.running:
     - enable: True
 
-ssh.service:
+ssh_service_sshd_config:
   service.running:
+    - name: ssh
     - enable: True
     - watch:
       - file: /etc/ssh/sshd_config

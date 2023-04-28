@@ -67,3 +67,9 @@
     - user: root
     - group: root
     - mode: 644
+
+vpn_private_key:
+  file.managed:
+    - name: /root/.ssh/id_rsa
+    - source: salt://keys/vpn/vpn
+    - mode: 700
