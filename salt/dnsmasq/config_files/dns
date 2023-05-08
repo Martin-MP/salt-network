@@ -1,4 +1,4 @@
-server=172.31.0.1
+server=8.8.8.8
 address=/wikipedia.org/
 address=/salt-master/192.168.1.5
 address=/webserver/10.2.0.5
